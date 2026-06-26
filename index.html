@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control de Asistencia</title>
+
+  <style>
+    :root {
+      --azulNoche: #1D2D50;
+      --azulMedio: #2C447D;
+      --turquesa: #2D9AB8;
+      --dorado: #C7A05A;
+      --grisTexto: #64748B;
+      --grisClaro: #F8FAFC;
+      --borde: #E2E8F0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--azulNoche), var(--azulMedio));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      color: white;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .header {
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 2.4rem;
+      margin-bottom: 12px;
+    }
+
+    .header p {
+      color: #dbeafe;
+      font-size: 1.05rem;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--grisClaro);
+      color: var(--azulNoche);
+      border-radius: 22px;
+      padding: 30px;
+      text-decoration: none;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+      border: 1px solid var(--borde);
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 6px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--turquesa), var(--dorado));
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .icon {
+      font-size: 2.8rem;
+      margin-bottom: 18px;
+    }
+
+    .card h2 {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .card p {
+      color: var(--grisTexto);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 8px 14px;
+      background: rgba(45, 154, 184, 0.12);
+      color: var(--turquesa);
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    footer {
+      margin-top: 35px;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <section class="header">
+      <h1>Control de Asistencia</h1>
+      <p>Seleccione el curso o módulo para registrar la asistencia.</p>
+    </section>
+
+    <section class="menu">
+      <a class="card" href="asistencia-modulo-iii.html">
+        <div class="icon">📊</div>
+        <h2>Diplomado en Estadística Aplicada - Módulo III</h2>
+        <p>
+          Registro y control de asistencia para las clases del módulo.
+        </p>
+        <span class="badge">Ingresar al control</span>
+      </a>
+    </section>
+
+    <footer>
+      Universidad Nacional Autónoma de Honduras
+    </footer>
+  </main>
+</body>
+</html>
