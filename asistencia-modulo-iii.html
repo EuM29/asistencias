@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Asistencia - Diplomado en Estadística Aplicada</title>
+
+<style>
+
+:root{
+--azulNoche:#1D2D50;
+--azulMedio:#2C447D;
+--turquesa:#2D9AB8;
+--dorado:#C7A05A;
+--grisTexto:#64748B;
+--grisClaro:#F8FAFC;
+--borde:#E2E8F0;
+--verde:#22C55E;
+--rojo:#EF4444;
+--amarillo:#F59E0B;
+--azul:#3B82F6;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,Arial,sans-serif;
+}
+
+body{
+background:#f5f7fb;
+}
+
+header{
+
+background:linear-gradient(135deg,var(--azulNoche),var(--azulMedio));
+color:white;
+padding:30px;
+text-align:center;
+
+}
+
+header h1{
+
+font-size:32px;
+margin-bottom:8px;
+
+}
+
+header p{
+
+opacity:.9;
+
+}
+
+.container{
+
+width:95%;
+max-width:1400px;
+margin:auto;
+margin-top:30px;
+
+}
+
+.info{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-bottom:25px;
+
+}
+
+.card{
+
+background:white;
+padding:20px;
+border-radius:16px;
+box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+}
+
+.card label{
+
+display:block;
+font-weight:bold;
+margin-bottom:8px;
+
+}
+
+.card input{
+
+width:100%;
+padding:10px;
+border:1px solid var(--borde);
+border-radius:8px;
+
+}
+
+table{
+
+width:100%;
+border-collapse:collapse;
+background:white;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+}
+
+thead{
+
+background:var(--azulNoche);
+color:white;
+
+}
+
+th{
+
+padding:16px;
+
+}
+
+td{
+
+padding:14px;
+text-align:center;
+border-bottom:1px solid var(--borde);
+
+}
+
+td:first-child{
+
+text-align:left;
+
+}
+
+.estado{
+
+display:flex;
+justify-content:center;
+gap:8px;
+
+}
+
+button.estadoBtn{
+
+border:none;
+padding:8px 14px;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+transition:.25s;
+
+}
+
+button.estadoBtn:hover{
+
+transform:scale(1.05);
+
+}
+
+.presente{
+
+background:var(--verde);
+color:white;
+
+}
+
+.tarde{
+
+background:var(--amarillo);
+color:white;
+
+}
+
+.ausente{
+
+background:var(--rojo);
+color:white;
+
+}
+
+.justificado{
+
+background:var(--azul);
+color:white;
+
+}
+
+.seleccionado{
+
+outline:4px solid black;
+
+}
+
+.resumen{
+
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+margin:30px 0;
+
+}
+
+.box{
+
+background:white;
+padding:20px;
+border-radius:14px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.box h2{
+
+font-size:34px;
+
+}
+
+.botones{
+
+display:flex;
+justify-content:center;
+gap:20px;
+margin:35px 0;
+
+}
+
+.botones button{
+
+padding:14px 28px;
+border:none;
+border-radius:12px;
+font-size:16px;
+cursor:pointer;
+font-weight:bold;
+
+}
+
+.guardar{
+
+background:var(--turquesa);
+color:white;
+
+}
+
+.limpiar{
+
+background:var(--dorado);
+color:white;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Diplomado en Estadística Aplicada</h1>
+
+<p>Módulo III • Control de asistencia</p>
+
+</header>
+
+<div class="container">
+
+<div class="info">
+
+<div class="card">
+
+<label>Fecha</label>
+
+<input type="date" id="fecha">
+
+</div>
+
+<div class="card">
+
+<label>Semana</label>
+
+<input type="text" placeholder="Semana 1">
+
+</div>
+
+<div class="card">
+
+<label>Tema</label>
+
+<input type="text" placeholder="Regresión Lineal">
+
+</div>
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>#</th>
+
+<th>Estudiante</th>
+
+<th>Asistencia</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tabla">
+
+</tbody>
+
+</table>
+
+<div class="resumen">
+
+<div class="box">
+
+<h2 id="p">0</h2>
+
+Presentes
+
+</div>
+
+<div class="box">
+
+<h2 id="t">0</h2>
+
+Tardanzas
+
+</div>
+
+<div class="box">
+
+<h2 id="a">0</h2>
+
+Ausentes
+
+</div>
+
+<div class="box">
+
+<h2 id="j">0</h2>
+
+Justificados
+
+</div>
+
+</div>
+
+<div class="botones">
+
+<button class="guardar" onclick="guardar()">
+
+💾 Guardar asistencia
+
+</button>
+
+<button class="limpiar" onclick="location.reload()">
+
+🔄 Limpiar
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+document.getElementById("fecha").valueAsDate=new Date();
+
+const estudiantes=[
+
+"Estudiante 1",
+"Estudiante 2",
+"Estudiante 3",
+"Estudiante 4",
+"Estudiante 5",
+"Estudiante 6",
+"Estudiante 7",
+"Estudiante 8"
+
+];
+
+const tabla=document.getElementById("tabla");
+
+estudiantes.forEach((e,i)=>{
+
+tabla.innerHTML+=`
+
+<tr>
+
+<td>${i+1}</td>
+
+<td>${e}</td>
+
+<td>
+
+<div class="estado">
+
+<button class="estadoBtn presente">✓</button>
+
+<button class="estadoBtn tarde">⏰</button>
+
+<button class="estadoBtn ausente">✗</button>
+
+<button class="estadoBtn justificado">J</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+document.querySelectorAll(".estado").forEach(grupo=>{
+
+grupo.querySelectorAll("button").forEach(btn=>{
+
+btn.onclick=()=>{
+
+grupo.querySelectorAll("button").forEach(b=>b.classList.remove("seleccionado"));
+
+btn.classList.add("seleccionado");
+
+actualizar();
+
+}
+
+});
+
+});
+
+function actualizar(){
+
+let p=0,t=0,a=0,j=0;
+
+document.querySelectorAll(".estado").forEach(g=>{
+
+const s=g.querySelector(".seleccionado");
+
+if(!s)return;
+
+if(s.classList.contains("presente"))p++;
+
+if(s.classList.contains("tarde"))t++;
+
+if(s.classList.contains("ausente"))a++;
+
+if(s.classList.contains("justificado"))j++;
+
+});
+
+document.getElementById("p").innerHTML=p;
+document.getElementById("t").innerHTML=t;
+document.getElementById("a").innerHTML=a;
+document.getElementById("j").innerHTML=j;
+
+}
+
+function guardar(){
+
+alert("Más adelante aquí se enviará la asistencia a Google Sheets.");
+
+}
+
+</script>
+
+</body>
+</html>
